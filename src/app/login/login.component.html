@@ -1,5 +1,17 @@
-<div>
-  Username <input id="username"><br/>
-  Password <input id="password"><br/>
-  <button id="login()">Login</button>
-</div>  
+<div style="text-align: center;">
+    <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit(loginForm.value)">
+        <div>
+            <mat-form-field >
+                <input formControlName="Username"  matInput placeholder="User Name" type="text" required>
+              </mat-form-field><br/>
+        </div>
+        <div>
+            <mat-form-field >
+                <input formControlName="Password" matInput placeholder="Password" type="password" required>
+              </mat-form-field>               
+        </div>  
+        <div [style.visibility]="visibility">{{Error}}</div>
+        <button  mat-raised-button color="primary" >Login</button>
+        </form>
+</div>
+

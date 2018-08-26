@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {IAuthObj} from './../authObj';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor() { }
+  private _loginAPI="http://localhost:3000/login"
 
-  login(username, password){
-    
+  constructor(private http :HttpClient) { }
+
+
+  login(username: string, password: string): Observable<IAuthObj>{
+    return this.http.post<IAuthObj>(this._loginAPI, { 'username': username, 'password': password });
 
   }
 }
