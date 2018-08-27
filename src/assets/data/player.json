@@ -1,0 +1,42 @@
+{
+    "Country":{       
+        "India":
+            {
+                "Kohli":"Batsman",
+                "Dhoni":"Wicket Keeper",
+                "Bumrah":"Bowler"
+            }
+        ,
+        "Australia":
+            {
+                "Smith":"Batsman",
+                "Warne":"Bowler"
+            }
+        ,
+        "South Africa":
+            {
+                "Morkel":"Bowler",
+                "ABD":"Batsman"
+            }
+        
+    },
+    "Role":{
+        "Batsman":
+            {
+                "Kohli":"India",
+                "Smith":"Australia",
+                "ABD":"South Africa"
+            },
+        "Bowler":
+            {
+                "Morkel" :"India",
+                "Warne":"Australia",
+                "Bumrah":"South Africa"
+            }
+        ,
+        "Wicket Keeper":
+            {
+                "Dhoni":"India"
+            }        
+    }
+}

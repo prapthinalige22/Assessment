@@ -1,7 +1,8 @@
 var express=require('express');
 var http=require('http');
 var path=require('path');
-bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
+var fs = require('fs');
 
 
 var app = express();
@@ -18,7 +19,7 @@ app.use(function(req, res, next) {
     next();
   });
 
-app.post('/login',function(req,res){
+app.post('/login',(req,res) => {
     console.log('User: '+JSON.stringify(req.body));
 
     if(req.body.username=="admin" && req.body.password=="admin"){
@@ -29,7 +30,14 @@ app.post('/login',function(req,res){
     }
 });
 
-app.get('/test',(req,res)=>res.send('It is there'));
+app.post('/getDetailsByCategory', (req,res) => {
+    let playerdata = fs.readFileSync('./src/assets/data/player.json');  
+    let players = JSON.parse(playerdata);  
+    console.log(players); 
+    res.send(players)
+
+})
+
 
 var server = http.createServer(app);
 var serverPort = process.env.port||3000;

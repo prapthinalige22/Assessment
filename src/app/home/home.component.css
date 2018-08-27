@@ -1,0 +1,22 @@
+.example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  } 
+
+  .playerimage{
+    position: absolute;
+    top:30%;
+    left:30%;
+    border:1px thin grey;
+    border-radius:2px;
+  }
+
+  .playerdetails{
+    position: relative;
+    top:30%;
+    border:1px thin grey;
+    border-radius:2px;
+  }

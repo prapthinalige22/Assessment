@@ -1,3 +1,33 @@
-<p>
-  home works!
-</p>
+<div >
+  <mat-sidenav-container  class="example-container">
+      <mat-sidenav opened mode="side">
+          <mat-tab-group>
+              <mat-tab label="Country"> 
+                Country
+                <app-players-tree category="Country" ></app-players-tree>
+              </mat-tab>
+              <mat-tab label="Role"> 
+                Role 
+                <app-players-tree category="Role" ></app-players-tree>
+              </mat-tab>
+            </mat-tab-group>
+      </mat-sidenav>
+      <section >
+        <div  class="playerimage">
+          <img src={{imagePath}} style="width:250px;height:250px;" [style.visibility]="isSelected">
+        </div>
+      </section>
+      <mat-sidenav opened mode="side" position="end" >
+        <table [style.visibility]="isSelected" class="playerdetails">
+            <tr >
+              <td>Player Name:</td>
+              <td>{{playerName}}</td>
+            </tr>
+            <tr >
+                <td>{{detailName}}:</td>
+                <td>{{detail}}</td>
+              </tr>
+        </table>      
+      </mat-sidenav>
+  </mat-sidenav-container>
+</div>

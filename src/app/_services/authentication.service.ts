@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {IAuthObj} from './../authObj';
+import {IAuthObj} from './../_interfaces/authObj';
 
 
 @Injectable({
