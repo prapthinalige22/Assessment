@@ -26,30 +26,7 @@ export class FileFlatNode {
  * The file structure tree data in string. The data could be parsed into a Json object
  */
 var TREE_DATA = "";
-//   var TREE_DATA = JSON.stringify({
-//   Country:{       
-//       "India":
-//           {
-//               "Kohli":"Batsman",
-//               "Dhoni":"Wicket Keeper",
-//               "Bumrah":"Bowler"
-//           }
-//       ,
-//       "Australia":
-//           {
-//               "Smith":"Batsman",
-//               "Warne":"Bowler"
-//           }
-//       ,
-//       "South Africa":
-//           {
-//               "Morkel":"Bowler",
-//               "ABD":"Batsman"
-//           }
-      
-//   }
 
-// });
 
 /**
  * File database, it can build a tree structured Json object from string.
@@ -136,14 +113,6 @@ export class PlayersTreeComponent  {
     database.dataChange.subscribe(data => this.dataSource.data = data);
 
   }
-
-  // ngOnInit(){
-  //   this._playerdetails.getDetailsByCategory(this.category).subscribe(data => {
-  //     TREE_DATA=data.toString();
-  //   });
-  
-  // }
-  
 
   sendDetails(nodeFiletype :string, nodeName :string):void {
     //send user details the user selected
