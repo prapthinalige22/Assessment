@@ -34,10 +34,31 @@ app.post('/getDetailsByCategory', (req,res) => {
     let playerdata = fs.readFileSync('./src/assets/data/player.json');  
     let players = JSON.parse(playerdata);  
     console.log(players); 
-    res.send(players)
+    res.send(players[req.body.category])
 
 })
 
+
+app.post('/addPlayerDetails', (req,res) => {
+    let playerdata = fs.readFileSync('./src/assets/data/player.json');  
+    let players = JSON.parse(playerdata);
+    console.log(players["Country"][req.body.country]); 
+
+    var name=  req.body.name;
+    var role=  req.body.role;
+    var country=  req.body.country;
+    players["Country"][country][name]=role;
+    players["Role"][role][name]=country;
+
+//     var temp=    JSON.stringify(players["Country"][country]);
+// temp.push({name: role});
+//     players["Role"][role].push({name: country});
+console.log(players["Country"][req.body.country]);
+    var playersJSON = JSON.stringify(players);
+    fs.writeFileSync('./src/assets/data/player.json', playersJSON);   
+    res.status(200).send({data:"Success"});
+
+});
 
 var server = http.createServer(app);
 var serverPort = process.env.port||3000;

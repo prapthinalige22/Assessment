@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
    {  
      console.log(form);  
      this.visibility="hidden"
-      this._authService.login(form.Username, form.Password)
+      this._authService.login(form["Username"], form["Password"])
        .subscribe(data => {
          if(!data.error){
           sessionStorage.setItem("jsessionid",JSON.parse(JSON.stringify(data)).jsessionid);
@@ -53,9 +53,6 @@ export class LoginComponent implements OnInit {
         });
    }
 
-   logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-}
+  
 
 }

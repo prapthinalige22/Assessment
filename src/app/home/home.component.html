@@ -13,6 +13,9 @@
             </mat-tab-group>
       </mat-sidenav>
       <section >
+        <div >
+          <button style="position: relative;left:90%;" (click)="logout()">Logout</button>
+        </div>
         <div  class="playerimage">
           <img src={{imagePath}} style="width:250px;height:250px;" [style.visibility]="isSelected">
         </div>
@@ -27,7 +30,29 @@
                 <td>{{detailName}}:</td>
                 <td>{{detail}}</td>
               </tr>
-        </table>      
+        </table> 
+        
+        <button  mat-raised-button color="primary" (click)="openEditForm()" [style.visibility]="isAddButtonVisible">Add Player</button>
+        <form [formGroup]="addPlyDtlForm" (ngSubmit)="onFormSubmit(addPlyDtlForm.value)" [style.visibility]="isAddFormVisible">
+            <div>
+                <mat-form-field >
+                    <input formControlName="Playername"  matInput placeholder="Player Name" type="text" required [(ngModel)]="Playername">
+                  </mat-form-field><br/>
+            </div>
+            <div>
+                <mat-form-field >
+                    <input formControlName="Country" matInput placeholder="Country" type="text" required [(ngModel)]="Country">
+                  </mat-form-field>               
+            </div>  
+            <div>
+                <mat-form-field >
+                    <input formControlName="Role" matInput placeholder="Player Role" type="text" required [(ngModel)]="Role">
+                  </mat-form-field>               
+            </div> 
+            <button  mat-raised-button color="primary" >Save</button>
+            
+            </form>
+            <span>{{msg}}</span>
       </mat-sidenav>
   </mat-sidenav-container>
 </div>
