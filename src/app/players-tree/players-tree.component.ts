@@ -1,5 +1,5 @@
 import {FlatTreeControl} from '@angular/cdk/tree';
-import {Component, Output, Input ,Injectable} from '@angular/core';
+import {Component, Output, Input ,Injectable, SimpleChanges} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {BehaviorSubject, Observable, of as observableOf} from 'rxjs';
 import { PlayerdetailsService } from '../_services/playerdetails.service';
@@ -42,9 +42,14 @@ export class FileDatabase {
   get data(): FileNode[] { return this.dataChange.value; }
 
   constructor(private _playerdetails :PlayerdetailsService) {  
+    this.dataRetrieve();
+  }
+
+  dataRetrieve(){
+
     this._playerdetails.getDetailsByCategory("Country").subscribe(data => {
       TREE_DATA=JSON.stringify(data);
-    this.initialize();
+      this.initialize();
 
     });
   }
@@ -109,10 +114,35 @@ export class PlayersTreeComponent  {
       this._isExpandable, this._getChildren);
     this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
     database.dataChange.subscribe(data => this.dataSource.data = data);
 
   }
+
+
+//   ngDoCheck() {
+//   //  var a=document.getSelection();
+//   // var a=document.getElementById('Country');
+//     if(document.getElementById('Country')){      
+//       this._playerdetails.getDetailsByCategory("Role").subscribe(data => {
+//         TREE_DATA=JSON.stringify(data);
+//       });
+//     }
+//     else{
+//       this._playerdetails.getDetailsByCategory("Country").subscribe(data => {
+//         TREE_DATA=JSON.stringify(data);
+//       });
+//     }
+  
+//   // var b=document.getElementById('Role');
+//  }
+
+//  ngOnChanges(changes: SimpleChanges) {
+//    var a=changes;
+//    var b =document.getElementById('Country');
+//    var c =document.getElementById('Role');
+
+//   // changes.prop contains the old and the new value...
+// }
 
   sendDetails(nodeFiletype :string, nodeName :string):void {
     //send user details the user selected
@@ -123,8 +153,6 @@ export class PlayersTreeComponent  {
   transformer = (node: FileNode, level: number) => {
     return new FileFlatNode(!!node.children, node.filename, level, node.type);
   }
-
-
 
   private _getLevel = (node: FileFlatNode) => node.level;
 

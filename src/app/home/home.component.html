@@ -1,38 +1,40 @@
-<div >
+
   <mat-sidenav-container  class="example-container">
-      <mat-sidenav opened mode="side">
-          <mat-tab-group>
+      <mat-sidenav opened mode="side" >
+          <mat-tab-group >
               <mat-tab label="Country"> 
                 Country
-                <app-players-tree category="Country" ></app-players-tree>
+                <app-players-tree category="Country" id="Country" ></app-players-tree>
               </mat-tab>
               <mat-tab label="Role"> 
                 Role 
-                <app-players-tree category="Role" ></app-players-tree>
+                <app-players-tree category="Role" id="Role"></app-players-tree>
               </mat-tab>
             </mat-tab-group>
       </mat-sidenav>
       <section >
-        <div >
+        <!-- <div >
           <button style="position: relative;left:90%;" (click)="logout()">Logout</button>
-        </div>
+        </div> -->
         <div  class="playerimage">
           <img src={{imagePath}} style="width:250px;height:250px;" [style.visibility]="isSelected">
         </div>
       </section>
       <mat-sidenav opened mode="side" position="end" >
-        <table [style.visibility]="isSelected" class="playerdetails">
-            <tr >
-              <td>Player Name:</td>
-              <td>{{playerName}}</td>
-            </tr>
-            <tr >
-                <td>{{detailName}}:</td>
-                <td>{{detail}}</td>
-              </tr>
-        </table> 
+        <div>
+          Hi {{username}}!
+          
+        <button style="right:0%;" (click)="logout()">Logout</button>
+          
+        </div>
+        <mat-card [style.visibility]="isSelected" class="playerdetails">
+          <mat-card-title>Player Details</mat-card-title>
+          <mat-card-content>Player Name: {{playerName}} </mat-card-content>
+          <mat-card-content>{{detailName}}: {{detail}}</mat-card-content>       
+        </mat-card>
+          <button  mat-raised-button color="primary" (click)="openEditForm()" [style.visibility]="isAddButtonVisible" >+</button>
+      
         
-        <button  mat-raised-button color="primary" (click)="openEditForm()" [style.visibility]="isAddButtonVisible">Add Player</button>
         <form [formGroup]="addPlyDtlForm" (ngSubmit)="onFormSubmit(addPlyDtlForm.value)" [style.visibility]="isAddFormVisible">
             <div>
                 <mat-form-field >
@@ -49,10 +51,17 @@
                     <input formControlName="Role" matInput placeholder="Player Role" type="text" required [(ngModel)]="Role">
                   </mat-form-field>               
             </div> 
-            <button  mat-raised-button color="primary" >Save</button>
-            
+            <div>
+              <input type="file" name="pic" ng2FileSelect [uploader]="uploader" />
+            </div>
+        
+            <div style="text-align: center;">
+              <button  mat-raised-button color="primary" [disabled]="!uploader.getNotUploadedItems().length">Save</button>
+              
+            </div>
+           
             </form>
+         
             <span>{{msg}}</span>
       </mat-sidenav>
   </mat-sidenav-container>
-</div>

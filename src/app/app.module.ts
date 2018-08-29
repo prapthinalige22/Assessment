@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';  
-import { MatButtonModule, MatInputModule, MatIconModule, MatFormFieldModule, MatSidenavModule, MatTabsModule, MatTreeModule } from '@angular/material';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Interceptor } from './interceptors/request-interceptor';
+import { MatCardModule,  MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, MatFormFieldModule, MatSidenavModule, MatTabsModule, MatTreeModule } from '@angular/material';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,13 +16,15 @@ import { PlayersTreeComponent } from './players-tree/players-tree.component';
   declarations: [
     AppComponent,
     routingComponents,
-    PlayersTreeComponent
+    PlayersTreeComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,  
-    ReactiveFormsModule,      
+    ReactiveFormsModule, 
+    MatCardModule,     
     MatButtonModule, 
     MatInputModule,
     MatIconModule,
@@ -27,10 +32,17 @@ import { PlayersTreeComponent } from './players-tree/players-tree.component';
     MatSidenavModule,
     MatTabsModule,
     MatTreeModule,
+    MatToolbarModule,
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

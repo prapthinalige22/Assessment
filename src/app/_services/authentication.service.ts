@@ -18,4 +18,8 @@ export class AuthenticationService {
     return this.http.post<IAuthObj>(this._loginAPI, { 'username': username, 'password': password });
 
   }
+
+  getToken() :string{
+    return localStorage.getItem("currentUser");
+  }
 }
